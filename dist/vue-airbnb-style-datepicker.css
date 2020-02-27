@@ -31,15 +31,15 @@
     box-sizing: border-box; }
   .asd__wrapper--full-screen {
     position: fixed;
-    top: 50px;
+    top: 0;
     right: 0;
-    bottom: 50px;
+    bottom: 0;
     left: 0;
     border: none;
     z-index: 100; }
 
 .asd__inner-wrapper {
-  transition: all 0s ease;
+  transition: all 0.3s ease;
   position: relative; }
 
 .asd__datepicker-header {
@@ -161,7 +161,7 @@
   max-width: 100%; }
 
 .asd__month {
-  transition: all 0s ease;
+  transition: all 0.3s ease;
   display: inline-block;
   padding: 15px; }
   .asd__month--hidden {
@@ -223,8 +223,6 @@
 
 .asd__action-buttons {
   min-height: 50px;
-  max-height: 50px;
-  height: 50px;
   padding-top: 10px;
   margin-bottom: 12px; }
   .asd__action-buttons button {
@@ -237,19 +235,19 @@
     cursor: pointer; }
     .asd__action-buttons button:hover {
       text-decoration: underline; }
+    .asd__action-buttons button:nth-child(1) {
+      float: left;
+      left: 15px; }
+    .asd__action-buttons button:nth-child(2) {
+      float: right;
+      right: 15px; }
 
 .asd__mobile-header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   padding: 15px 15px 15px 15px !important;
   text-align: center;
-  min-height: 50px;
-  max-height: 50px;
-  height: 50px;
-  background-color: #fff; }
+  height: 50px; }
   .asd__mobile-header h3 {
     font-size: 20px;
     margin: 0; }
@@ -261,18 +259,13 @@
       display: block; } }
 
 .asd__mobile-close {
-  border: 1px solid #ddd;
+  border: none;
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 7px;
+  right: 5px;
   padding: 5px;
   z-index: 100;
-  cursor: pointer;
-  background: transparent;
-  border-radius: 150px !important;
-  width: 35px;
-  color: #aaa;
-  font-weight: bold; }
+  cursor: pointer; }
   .asd__mobile-close__icon {
     position: relative;
     font-size: 1.6em;
