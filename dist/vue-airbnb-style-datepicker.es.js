@@ -833,7 +833,7 @@ var AirbnbStyleDatepicker = {
         this.colors.inRangeBorder = colors.inRangeBorder || this.colors.inRangeBorder;
         this.colors.disabled = colors.disabled || this.colors.disabled;
       }
-l
+
       /*------------------------------- Calendar Text is set dynamically in base of languaje ------------------------------------ */
 
       const { monthNames, days, daysShort } = this.locales[this.$store.$i18n.locale];
@@ -869,7 +869,7 @@ l
       var firstDateOfMonth = format(date, 'YYYY-MM-01');
       var year = format(date, 'YYYY');
       var monthNumber = parseInt(format(date, 'M'));
-      var monthName = this.monthNames[monthNumber - 1];
+      var monthName = this.locales[this.$store.$i18n.locale].monthNames[monthNumber - 1];
 
       return {
         year: year,
