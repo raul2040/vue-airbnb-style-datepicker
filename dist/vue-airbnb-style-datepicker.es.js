@@ -200,6 +200,7 @@ var AirbnbStyleDatepicker = {
     resizeSelect: ResizeSelect,
   },
   props: {
+    isSearchCalendar: { type: Boolean, default: true },
     triggerElementId: { type: String },
     dateOne: { type: [String, Date] },
     dateTwo: { type: [String, Date] },
@@ -856,8 +857,13 @@ var AirbnbStyleDatepicker = {
       }
       this.startingDate = this.subtractMonths(startDate);
       this.selectedDate1 = this.dateOne;
-      this.selectedDate2 = this.dateTwo;
-      this.focusedDate = startDate;
+      // If not search calendar we set seletectedDate2 with min Stay 
+      if (!this.isSearchCalendar) {
+        this.setMinStay();
+        this.selectedDate2 = this.addDays(this.dateOne, this.minStay);
+      } else {
+        this.selectedDate2 = this.addDays(this.dateOne, 1);
+      }
     },
     setSundayToFirstDayInWeek: function setSundayToFirstDayInWeek() {
       var lastDay = this.days.pop();
@@ -931,7 +937,7 @@ var AirbnbStyleDatepicker = {
 
       if (this.isSelectingDate1 || isBefore(date, this.selectedDate1)) {
         this.selectedDate1 = date;
-        this.setMinStay();
+        this.isSearchCalendar ? this.minStay = 1 : this.setMinStay();
         this.disabledMinStayDays();
         this.isSelectingDate1 = false;
 
@@ -961,17 +967,17 @@ var AirbnbStyleDatepicker = {
         }
       }
     },
-    disabledMinStayDays: function() {
+    disabledMinStayDays: function () {
       this.availability.forEach((el, ind) => {
-        if(el.date == this.selectedDate1) {
+        if (el.date == this.selectedDate1) {
           this.currentInd = ind;
         };
       });
-      for(let i=1; i<this.minStay; i++) {
+      for (let i = 1; i < this.minStay; i++) {
         this.disabledDates.push(this.availability[this.currentInd + i].date);
       };
     },
-    enabledMinStayDays: function() {
+    enabledMinStayDays: function () {
       this.disabledDates.splice(-this.minStay, this.minStay);
     },
     addDays: function (date, days) {
@@ -982,8 +988,8 @@ var AirbnbStyleDatepicker = {
     },
     setMinStay: function setMinStay() {
       let selectedDateData = this.availability.filter((el) => { return el['date'] == this.selectedDate1 });
-      this.minStay = selectedDateData[0]['min_stay'];
-      this.minStay = 5; // We mock minStay for work
+      //Mock value minstay to work 
+      this.minStay = selectedDateData[0]['min_stay'] ? selectedDateData[0]['min_stay'] : 5;
     },
     setHoverDate: function setHoverDate(date) {
       this.hoverDate = date;
