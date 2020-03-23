@@ -856,13 +856,21 @@ var AirbnbStyleDatepicker = {
         startDate = this.minDate;
       }
       this.startingDate = this.subtractMonths(startDate);
-      this.selectedDate1 = this.dateOne;
-      // If not search calendar we set seletectedDate2 with min Stay 
+      this.selectedDate1 = startDate;
+      // If not booking engine search we set seletectedDate2 with min Stay 
       if (!this.isSearchCalendar) {
-        this.setMinStay();
-        this.selectedDate2 = this.addDays(this.dateOne, this.minStay);
+        if (this.dateTwo) {
+          this.selectedDate2 = this.dateTwo;
+        } else {
+          this.setMinStay();
+          this.selectedDate2 = this.dateTwo || this.addDays(this.dateOne, this.minStay);
+        }
       } else {
-        this.selectedDate2 = this.addDays(this.dateOne, 1);
+        if (this.dateTwo) {
+          this.selectedDate2 = this.dateTwo;
+        } else {
+          this.selectedDate2 = this.addDays(startDate, 1);
+        }
       }
     },
     setSundayToFirstDayInWeek: function setSundayToFirstDayInWeek() {
